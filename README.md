@@ -1,1 +1,1 @@
-# loyalbridge-admin-anjalee-neelika
+# LoyalBridge Admin Panel
