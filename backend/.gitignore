@@ -6,6 +6,7 @@ target/
 
 src/main/java/com/backend/backend/config/DataLoader.java
 
+
 ### ENV ###
 .env
 
