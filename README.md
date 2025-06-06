@@ -40,7 +40,7 @@ Clone the repository:
    cd backend
    ```
 2. Setup environment variables
-       * Create a new '.env' file using '.env.example' as a reference adn add the relevant details.
+   * Create a new '.env' file using '.env.example' as a reference adn add the relevant details.
 
 3. Start the Spring Boot application
    
