@@ -1,6 +1,6 @@
 package com.backend.backend.auth.services;
 
-import com.backend.backend.auth.entities.User;
+import com.backend.backend.auth.entities.Admin;
 import com.backend.backend.auth.repositories.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,12 +15,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDetailsRepository.findByEmail(username);
+        Admin admin = userDetailsRepository.findByEmail(username);
 
-        if (user == null) {
+        if (admin == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        return user;
+        return admin;
     }
 }
