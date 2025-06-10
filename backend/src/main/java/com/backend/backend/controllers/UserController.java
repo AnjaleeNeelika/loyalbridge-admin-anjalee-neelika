@@ -87,7 +87,7 @@ public class UserController {
         // Data rows
         for (User user : users) {
             writer.printf("%s, %s %s, %s, %s, %b, %b%n",
-                    user.getId().toString(),
+                    user.getId().toString(),    // converted the id from uuid to string
                     user.getName(),
                     user.getEmail(),
                     user.getPhone(),
