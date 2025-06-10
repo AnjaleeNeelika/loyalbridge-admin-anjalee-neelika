@@ -7,9 +7,12 @@ import com.backend.backend.entities.User;
 import com.backend.backend.entities.UserStatus;
 import com.backend.backend.services.UserProfileService;
 import com.backend.backend.services.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,5 +66,35 @@ public class UserController {
     ) {
         User updatedUser = userService.updateUserFlags(userId, request);
         return ResponseEntity.ok(updatedUser);
+    }
+
+    @GetMapping("/export")
+    public void ExportUsersToCSV(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=users.csv");
+
+        List<User> users = userService.getAllUsers();
+
+        PrintWriter writer = response.getWriter();
+        writeCsv(users, writer);
+        writer.flush();
+    }
+
+    private void writeCsv(List<User> users, PrintWriter writer) {
+        // Header
+        writer.println("ID, Name, Email, Phone, Status, Verified, High Risk");
+
+        // Data rows
+        for (User user : users) {
+            writer.printf("%s, %s %s, %s, %s, %b, %b%n",
+                    user.getId().toString(),    // converted the id from uuid to string
+                    user.getName(),
+                    user.getEmail(),
+                    user.getPhone(),
+                    user.getStatus(),
+                    user.isVerified(),
+                    user.isHighRisk()
+            );
+        }
     }
 }
