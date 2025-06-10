@@ -1,5 +1,6 @@
 package com.backend.backend.controllers;
 
+import com.backend.backend.dto.UserFlagUpdateRequest;
 import com.backend.backend.dto.UserStateUpdateRequest;
 import com.backend.backend.entities.PointTransaction;
 import com.backend.backend.entities.User;
@@ -52,6 +53,15 @@ public class UserController {
     ) {
         User updatedUser = userService.updateUserStatus(userId, request.getStatus());
 
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @PutMapping("/{userId}/flag")
+    public ResponseEntity<User> updateUserFlags(
+            @PathVariable UUID userId,
+            @RequestBody UserFlagUpdateRequest request
+    ) {
+        User updatedUser = userService.updateUserFlags(userId, request);
         return ResponseEntity.ok(updatedUser);
     }
 }
