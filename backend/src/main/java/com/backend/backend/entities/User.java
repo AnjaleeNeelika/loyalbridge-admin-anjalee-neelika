@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "users")
@@ -32,4 +33,7 @@ public class User {
 
     private boolean verified;
     private boolean highRisk;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PointTransaction> pointHistory;
 }
