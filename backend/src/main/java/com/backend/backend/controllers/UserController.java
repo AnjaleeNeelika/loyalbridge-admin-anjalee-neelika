@@ -1,5 +1,6 @@
 package com.backend.backend.controllers;
 
+import com.backend.backend.dto.UserStateUpdateRequest;
 import com.backend.backend.entities.PointTransaction;
 import com.backend.backend.entities.User;
 import com.backend.backend.entities.UserStatus;
@@ -42,5 +43,15 @@ public class UserController {
     public ResponseEntity<List<PointTransaction>> getPointHistory(@PathVariable UUID userId) {
         List<PointTransaction> history = userProfileService.getUserPointHistory(userId);
         return ResponseEntity.ok(history);
+    }
+
+    @PutMapping("/{userId}/status")
+    public ResponseEntity<User> updateUserStatus(
+            @PathVariable UUID userId,
+            @RequestBody UserStateUpdateRequest request
+    ) {
+        User updatedUser = userService.updateUserStatus(userId, request.getStatus());
+
+        return ResponseEntity.ok(updatedUser);
     }
 }
